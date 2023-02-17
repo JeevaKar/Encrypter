@@ -7,13 +7,140 @@ def cls():
   os.system("cls" if os.name == "nt" else "clear")
 
 def startup():
-  print("Version 1.1.1")
+  print("Version 2.0.0")
   sleep(0.5)
   print("You are not allowed you reproduce, sell, or license this software to anybody else.")
   sleep(2)
   cls()
+
 def split(text):
   return [char for char in text]
+
+def primary_encrypt(text):
+  text = split(text)
+  key = {
+    "a":"d",
+    "b":"x",
+    "c":"n",
+    "d":"p",
+    "e":"l",
+    "f":"g",
+    "g":"m",
+    "h":"h",
+    "i":"r",
+    "j":"k",
+    "k":"c",
+    "l":"i",
+    "m":"z",
+    "n":"u",
+    "o":"w",
+    "p":"j",
+    "q":"a",
+    "r":"t",
+    "s":"o",
+    "t":"b",
+    "u":"s",
+    "v":"q",
+    "w":"v",
+    "x":"f",
+    "y":"e",
+    "z":"y",
+    "A":"D",
+    "B":"X",
+    "C":"N",
+    "D":"P",
+    "E":"L",
+    "F":"G",
+    "G":"M",
+    "H":"H",
+    "I":"R",
+    "J":"K",
+    "K":"C",
+    "L":"I",
+    "M":"Z",
+    "N":"U",
+    "O":"W",
+    "P":"J",
+    "Q":"A",
+    "R":"S",
+    "S":"O",
+    "T":"B",
+    "U":"S",
+    "V":"Q",
+    "W":"V",
+    "X":"F",
+    "Y":"E",
+    "Z":"Y",
+  }
+  end = ""
+  for letter in text:
+    if letter in key:
+      letter = key[letter]
+    end += letter
+  return end
+
+def primary_decrypt(text):
+  text = split(text)
+  key = {
+    "d":"a",
+    "x":"b",
+    "n":"c",
+    "p":"d",
+    "l":"e",
+    "g":"f",
+    "m":"g",
+    "h":"h",
+    "r":"i",
+    "k":"j",
+    "c":"k",
+    "i":"l",
+    "z":"m",
+    "u":"n",
+    "w":"o",
+    "j":"p",
+    "a":"q",
+    "t":"r",
+    "o":"s",
+    "b":"t",
+    "s":"u",
+    "q":"v",
+    "v":"w",
+    "f":"x",
+    "e":"y",
+    "y":"z",
+    "D":"A",
+    "X":"B",
+    "N":"C",
+    "P":"D",
+    "L":"E",
+    "G":"F",
+    "M":"G",
+    "H":"H",
+    "R":"I",
+    "K":"J",
+    "C":"K",
+    "I":"L",
+    "Z":"M",
+    "U":"N",
+    "W":"O",
+    "J":"P",
+    "A":"Q",
+    "T":"R",
+    "O":"S",
+    "B":"T",
+    "S":"U",
+    "Q":"V",
+    "V":"W",
+    "F":"X",
+    "E":"Y",
+    "Y":"Z"
+  }
+  end = ""
+  for letter in text:
+    if letter in key:
+      letter = key[letter]
+    end += letter
+  return end
 
 def encrypt(o_key, o_text, func):
   temp_key = o_key
@@ -170,7 +297,9 @@ def terminal():
           code = None
           if func == "2":
             code = encrypt(key, text, "d")
+            code = primary_decrypt(code)
           elif func == "1":
+            text = primary_encrypt(text)
             code = encrypt(key, text, "e")
           print("This is your encrypted text:\n" + code + "\n")
           save(code)
@@ -191,7 +320,9 @@ def terminal():
           code = None
           if func == "2":
             code = rot(text, "d")
+            code = primary_decrypt(code)
           elif func == "1":
+            text = primary_encrypt(text)
             code = rot(text, "e")
           break
           print("This is your encrypted text:\n"+code)
@@ -213,7 +344,9 @@ def terminal():
           code = None
           if func == "2":
             code = matrix(text, key, "d")
+            code = primary_decrypt(code)
           elif func == "1":
+            text = primary_encrypt(text)
             code = matrix(text, key, "e")
           print("This is your encrypted text:\n"+code)
           save(code)
