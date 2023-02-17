@@ -7,7 +7,7 @@ def cls():
   os.system("cls" if os.name == "nt" else "clear")
 
 def startup():
-  print("Version 1.1.0")
+  print("Version 1.1.1")
   sleep(0.5)
   print("You are not allowed you reproduce, sell, or license this software to anybody else.")
   sleep(2)
