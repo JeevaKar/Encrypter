@@ -1,7 +1,6 @@
 import os
 from time import sleep
-import re
-import json
+from encrypter import encrypt,decrypt
 
 def cls():
   os.system("cls" if os.name == "nt" else "clear")
@@ -142,7 +141,7 @@ def primary_decrypt(text):
     end += letter
   return end
 
-def encrypt(o_key, o_text, func):
+def oldencrypt(o_key, o_text, func):
   temp_key = o_key
   while len(temp_key) < len(o_text):
     temp_key += o_key 
@@ -296,11 +295,11 @@ def terminal():
               cls()
           code = None
           if func == "2":
-            code = encrypt(key, text, "d")
+            code = decrypt(text, key)
             code = primary_decrypt(code)
           elif func == "1":
             text = primary_encrypt(text)
-            code = encrypt(key, text, "e")
+            code = encrypt(text, key)
           print("This is your encrypted text:\n" + code + "\n")
           save(code)
           cls()
@@ -350,6 +349,70 @@ def terminal():
             code = matrix(text, key, "e")
           print("This is your encrypted text:\n"+code)
           save(code)
+          break
+        if cipher == "1":
+          cls()
+          key = input("Please enter your key: ")
+          cls()
+          file_o_ent = input("Would you like to enter your text or read from a text file?(t for type/f for file)\n")
+          cls()
+          text = ""
+          if file_o_ent == "t":
+            text = input("Please enter your text:\n")
+          else:
+            while True:
+              text = input("Please enter your file location:\n")
+              try:
+                file = open(text, "r")
+                text = file.read()
+                file.close()
+                break
+              except:
+                print("Sorry, but it seems like that file does not exist, please try again.")
+                sleep(2)
+              cls()
+          code = None
+          if func == "2":
+            code = decrypt(text, key)
+            code = primary_decrypt(code)
+          elif func == "1":
+            text = primary_encrypt(text)
+            code = encrypt(text, key)
+          print("This is your encrypted text:\n" + code + "\n")
+          save(code)
+          cls()
+          break
+        elif cipher == "4":
+          cls()
+          key = input("Please enter your key: ")
+          cls()
+          file_o_ent = input("Would you like to enter your text or read from a text file?(t for type/f for file)\n")
+          cls()
+          text = ""
+          if file_o_ent == "t":
+            text = input("Please enter your text:\n")
+          else:
+            while True:
+              text = input("Please enter your file location:\n")
+              try:
+                file = open(text, "r")
+                text = file.read()
+                file.close()
+                break
+              except:
+                print("Sorry, but it seems like that file does not exist, please try again.")
+                sleep(2)
+              cls()
+          code = None
+          if func == "2":
+            code = oldencrypt(key, text, "d")
+            code = primary_decrypt(code)
+          elif func == "1":
+            text = primary_encrypt(text)
+            code = oldencrypt(key, text, "e")
+          print("This is your encrypted text:\n" + code + "\n")
+          save(code)
+          cls()
           break
         else:
           print("Sorry that is not a valid choice, please try again!")
