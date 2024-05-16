@@ -64,6 +64,3 @@ def decrypt(text, key):
         i += 1
     text = unnum(text)
     return text
-    
-print(encrypt("hello darkness my old friend... I've come to see you again...", "hi"))
-print(decrypt(encrypt("hello darkness my old friend... I've come to see you again...", "hi"), "hi"))
